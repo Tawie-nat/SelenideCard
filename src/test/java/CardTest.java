@@ -1,8 +1,11 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -12,9 +15,17 @@ import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
+
 public class CardTest {
+    private WebDriver driver;
+
+    @BeforeAll
+    static void setUpAll(){
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\HP\\Desktop\\SelenideCard\\driver\\win\\chromedriver.exe");
+    }
     @BeforeEach
     void setUp() {
+        driver = new ChromeDriver();
         Configuration.holdBrowserOpen = true;
         open("http://localhost:9999/");
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
