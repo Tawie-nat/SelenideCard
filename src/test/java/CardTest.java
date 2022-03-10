@@ -17,6 +17,7 @@ public class CardTest {
     void setUp() {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:9999/");
+        $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
     }
 
     String generateDate(int days) {
@@ -28,7 +29,6 @@ public class CardTest {
         String planningDate = generateDate(4);
         $("[data-test-id='city'] input").setValue("Нижний Новгород");
         $(".menu-item").shouldBe(Condition.appear, Duration.ofSeconds(5)).click();
-        $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id='date'] input").doubleClick().sendKeys(planningDate);
         $("[data-test-id='name'] input").setValue("Иванова Алиса");
         $("[data-test-id='phone'] input").setValue("+79050001234");
